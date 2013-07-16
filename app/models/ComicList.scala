@@ -4,8 +4,22 @@ import com.top10.redis._
 import play.api.libs.json._
 
 case class Comic(id: String, name: String) {
-  var lastUpdate = None
-  var stripUrl = None
+  var lastUpdate = "Barbar"
+  var stripUrl = "someurl"
+  
+  implicit val comicWriter = new Writes[Comic] {
+    def writes(c: Comic): JsValue = {
+      Json.obj(
+        "id" -> c.id,
+        "name" -> c.name,
+        "stripUrl" -> c.stripUrl
+      )
+    }
+  }
+
+  def json: JsValue = Json.toJson(this)
+
+  
 
 /*  implicit object ComicFormat extends Format[Comic] {
 //    def reads(json: JSValue) = 
@@ -19,16 +33,30 @@ case class Comic(id: String, name: String) {
 */
 }
 
-case class ComicList()
+object Comics {
+  implicit val comicListWriter = new Writes[Comic] {
+    def writes(c: Comic): JsValue = {
+      Json.obj(
+        "id" -> c.id,
+        "name" -> c.name
+      )
+    }
+  }
 
-object ComicList {
-  implicit val comicFormat = Json.format[Comic]
   private val comicList = List(Comic("wv", "Viivi ja Wagner"),
                                Comic("sf", "Sinfest"),
                                Comic("fp", "Fingerpori")
                               )
 
-  val json = Json.toJson(Json.obj("comics" -> comicList))
+  val listjson = Json.toJson(Json.obj("comics" -> comicList))
+
+  def comicJson(id: String): JsValue = {
+    val comic = comicList.find(c => c.id == id)
+    comic match {
+        case Some(c) => c.json
+        case None    => JsString("")
+    }
+  }
 }
 
 

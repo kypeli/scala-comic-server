@@ -13,7 +13,7 @@ object Application extends Controller {
   }
 
   def list = Action {
-    Ok(models.ComicList.json)
+    Ok(models.Comics.listjson)
 
 /*    val httpResponse = WS.url("http://www.johanpaul.com/blog/")
     Async {
@@ -22,5 +22,12 @@ object Application extends Controller {
       }
     }
 */    
+  }
+
+  def comic(id: String) = Action {
+    id.length match {
+      case 0 => BadRequest("No id specified")
+      case _ => Ok(models.Comics.comicJson(id))
+    }
   }
 }
