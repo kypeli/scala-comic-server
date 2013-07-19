@@ -3,7 +3,6 @@ package models
 import play.api._
 import play.api.libs.ws._
 import scala.concurrent._
-// import com.top10.redis._
 import play.api.libs.json._
 import ExecutionContext.Implicits.global
 import com.github.nscala_time.time.Imports._
@@ -16,7 +15,7 @@ abstract class Comic {
   val countryCodes: String = ""
 
   var lastUpdated: DateTime = DateTime.yesterday
-  var stripUrl = "someurl"
+  var stripUrl = ""
   
   implicit val comicWriter = new Writes[Comic] {
     def writes(c: Comic): JsValue = {
@@ -32,7 +31,7 @@ abstract class Comic {
     val resultPromise = promise[String]
 
     future {
-      if ((lastUpdated + 60.minutes) < DateTime.now) {
+      if (comicRegex != null && (lastUpdated + 60.minutes) < DateTime.now) {
         Logger.info("Cache expired. Fetching new comic URL.")
         WS.url(siteUrl).get().map { response =>
           stripUrl = comicRegex.findFirstIn(response.body).get
@@ -74,3 +73,52 @@ class Sinfest extends Comic {
   override val comicRegex = """http://sinfest.net/[a-z\?=\.:/_0-9]*/comics/[a-z\?=\.:/_0-9-]*.gif""".r    
 }
 
+class Dilbert extends Comic {
+  override val id = "dilbert"
+  override val name = "Dilbert"
+  override val siteUrl = "http://www.dilbert.com/strips"
+  override val comicRegex = """http://dilbert.com/dyn/str_strip[a-z./0-9].*.gif""".r    
+}
+
+class Userfriendly extends Comic {
+  override val id = "uf"
+  override val name = "UserFriendly"
+  override val siteUrl = "http://www.userfriendly.org/"
+  override val comicRegex = """http://www.userfriendly.org/cartoons/archives/[a-z0-9/]*.gif""".r    
+}
+
+class XKCD extends Comic {
+  override val id = "x"
+  override val name = "XKCD"
+  override val siteUrl = "http://xkcd.com"
+  override val comicRegex = """http://imgs.xkcd.com/comics/[a-z_./0-9]*""".r    
+}
+
+class PhDComic extends Comic {
+  override val id = "phd"
+  override val name = "PhD Comic"
+  stripUrl = "http://kypeli.kapsi.fi/comics/phd.png"
+}
+
+class QuestionableContent extends Comic {
+  override val id = "qc"
+  override val name = "Questionable Content"
+  override val siteUrl = "http://questionablecontent.net/"
+  override val comicRegex = """http://www.questionablecontent.net/comics/[0-9.a-z]*""".r 
+}
+
+class AnonyymitElaimet extends Comic {
+  override val id = "ae"
+  override val name = "Anonyymit Eläimet"
+  override val siteUrl = "http://nyt.fi/category/sarjakuvat/"  
+  override val comicRegex = """http://nyt.fi/wp-content/uploads/[a-z._\-/0-9]*ae[a-z._\-/0-9]*.jpg""".r
+  override val countryCodes = "fi"
+}
+
+class FokIt extends Comic {
+  override val id = "fi"
+  override val name = "Fok_it"
+  override val siteUrl = "http://nyt.fi/tag/fok_it-kaikki/"  
+  override val comicRegex = """http://nyt.fi/wp-content/uploads/[a-z._\-/0-9]*.jpg""".r
+  override val countryCodes = "fi"
+}

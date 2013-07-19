@@ -22,16 +22,23 @@ object Comics {
     }
   }
 
-  private val comicList = List(new Fingerpori,
+  private val comicList = List(new Dilbert, 
+                               new Fingerpori,
                                new ViiviJaWagner,
-                               new Sinfest)
+                               new Sinfest,
+                               new Userfriendly,
+                               new XKCD,
+                               new PhDComic,
+                               new QuestionableContent,
+                               new AnonyymitElaimet,
+                               new FokIt)
 
   def listjson(remoteIP: String): Future[JsValue] = {
     Logger.info("Got request from: " + remoteIP)
     WS.url(IPINFODB_URL + remoteIP).get().map { response => 
         Logger.info("Geo info: " + response.body)
       val country = (response.json \ "countryCode").as[String].toLowerCase
-      Json.toJson(Json.obj("comics" -> comicList.filter(c => (c.countryCodes == "" ||c.countryCodes == country) )))
+      Json.toJson(Json.obj("comics" -> comicList.filter(c => (c.countryCodes == "" || c.countryCodes.contains(country)) )))
     }
   }
 //   val listjson = Json.toJson(Json.obj("comics" -> comicList))
