@@ -21,26 +21,22 @@ object Application extends Controller {
   }
 
   def comic(id: String) = Action { request =>
-    Logger.info("New request for comic: " + id)
-    try {
-      val futureJson = models.Comics.comicJson(id)
-      Async {      
-        futureJson.map(json => Ok(json))
-      }
-    } catch {
+    id.length match {
+      case 0 => BadRequest("No id specified.")
       case _ => {
-        Logger.error("No such comic: " + request)
-        BadRequest("Error: No such comic: " + id)
+        Logger.info("New request for comic: " + id)
+        try {
+          val futureJson = models.Comics.comicJson(id)
+          Async {      
+            futureJson.map(json => Ok(json))
+          }
+        } catch {
+          case _ => {
+            Logger.error("No such comic: " + request)
+            BadRequest("Error: No such comic: " + id)
+          }
+        }
       }
     }
-/*      id.length match {
-          case 0 => BadRequest("No id specified")
-          case _ => {
-            val futureResponse: Future[play.api.libs.ws.Response] = models.Comics.comicJson(id)
-            futureResponse onSuccess {
-               case response => Ok(response.body)
-            }
-          }
-      }*/
   }
 }

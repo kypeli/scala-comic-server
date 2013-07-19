@@ -8,6 +8,8 @@ import ExecutionContext.Implicits.global
 import com.github.nscala_time.time.Imports._
 
 abstract class Comic {
+  val RefreshInterval = 60 // Minutes.
+
   val comicRegex: scala.util.matching.Regex = null
   val id: String = ""
   val name: String = ""
@@ -31,10 +33,20 @@ abstract class Comic {
     val resultPromise = promise[String]
 
     future {
-      if (comicRegex != null && (lastUpdated + 60.minutes) < DateTime.now) {
+      if (comicRegex != null && (lastUpdated + RefreshInterval.minutes) < DateTime.now) {
         Logger.info("Cache expired. Fetching new comic URL.")
         WS.url(siteUrl).get().map { response =>
-          stripUrl = comicRegex.findFirstIn(response.body).get
+          Logger.info("Have result.")
+          try {
+            val http = response.body
+            comicRegex.findFirstIn(http) match {
+              case Some(url) => stripUrl = url
+              case None      => Logger.error("Could not find comic url for id: " + id)
+            }
+          } catch {
+            case e: Exception => Logger.error("Error getting response from server: " + e.toString())
+          }
+
           lastUpdated = DateTime.now
           
           resultPromise success Json.toJson(this).toString()
@@ -76,7 +88,7 @@ class Sinfest extends Comic {
 class Dilbert extends Comic {
   override val id = "dilbert"
   override val name = "Dilbert"
-  override val siteUrl = "http://www.dilbert.com/strips"
+  override val siteUrl = "http://www.dilbert.com/strips/"
   override val comicRegex = """http://dilbert.com/dyn/str_strip[a-z./0-9].*.gif""".r    
 }
 
