@@ -119,6 +119,6 @@ class FokIt extends Comic {
   override val id = "fi"
   override val name = "Fok_it"
   override val siteUrl = "http://nyt.fi/tag/fok_it-kaikki/"  
-  override val comicRegex = """http://nyt.fi/wp-content/uploads/[a-z._\-/0-9]*.jpg""".r
+  override val comicRegex = """http://nyt.fi/wp-content/uploads/[a-z._\-/0-9]*fokit_[a-z._\-/0-9]*.jpg""".r
   override val countryCodes = "fi"
 }
