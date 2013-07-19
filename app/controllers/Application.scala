@@ -15,14 +15,6 @@ object Application extends Controller {
 
   def list = Action {
     Ok(models.Comics.listjson)
-
-/*    val httpResponse = WS.url("http://www.johanpaul.com/blog/")
-    Async {
-      httpResponse.get.map { request =>
-        Ok(request.body)
-      }
-    }
-*/    
   }
 
   def comic(id: String) = Action { request =>

@@ -12,6 +12,7 @@ abstract class Comic {
   val comicRegex: scala.util.matching.Regex = null
   val id: String = ""
   val name: String = ""
+  val siteUrl: String = ""
 
   var lastUpdated: DateTime = DateTime.yesterday
   var stripUrl = "someurl"
@@ -32,15 +33,16 @@ abstract class Comic {
     future {
       if ((lastUpdated + 60.minutes) < DateTime.now) {
         Logger.info("Cache expired. Fetching new comic URL.")
-        WS.url("http://www.hs.fi/fingerpori").get().map { response =>
+        WS.url(siteUrl).get().map { response =>
           stripUrl = comicRegex.findFirstIn(response.body).get
-          resultPromise success stripUrl
           lastUpdated = DateTime.now
-          Logger.info("Serving new result: " + stripUrl)
+          
+          resultPromise success Json.toJson(this).toString()
+          Logger.info("Serving new result: " + stripUrl)          
         }
       } else {
         Logger.info("Serving cached result: " + stripUrl)
-        resultPromise success stripUrl 
+        resultPromise success Json.toJson(this).toString()
       }
     }
 
@@ -51,6 +53,7 @@ abstract class Comic {
 class Fingerpori extends Comic {
   override val id = "fp"
   override val name = "Fingerpori"
+  override val siteUrl = "http://www.hs.fi/fingerpori"
   override val comicRegex = """http://[a-z\?=\.:/_0-9]*/sarjis/[a-z\?=\.:/_0-9]*""".r    
 }
 
