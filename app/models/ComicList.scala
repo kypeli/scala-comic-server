@@ -1,7 +1,12 @@
 package models
 
+import play.api._
+import play.api.libs.ws._
+import play.api.libs.concurrent._
+import scala.concurrent._
 import com.top10.redis._
 import play.api.libs.json._
+import ExecutionContext.Implicits.global
 
 case class Comic(id: String, name: String) {
   var lastUpdate = "Barbar"
@@ -17,7 +22,22 @@ case class Comic(id: String, name: String) {
     }
   }
 
-  def json: JsValue = Json.toJson(this)
+//  def json: JsValue = Json.toJson(this)  
+def json: Future[String] = {  
+  val resultPromise = promise[String]
+
+  future {
+    if (false) {
+      WS.url("http://www.hs.fi").get().map { response =>
+        resultPromise success response.body
+      }
+    } else {
+      resultPromise success "Testing"
+    }
+  }
+
+  resultPromise.future 
+}
 
   
 
@@ -50,13 +70,7 @@ object Comics {
 
   val listjson = Json.toJson(Json.obj("comics" -> comicList))
 
-  def comicJson(id: String): JsValue = {
-    val comic = comicList.find(c => c.id == id)
-    comic match {
-        case Some(c) => c.json
-        case None    => JsString("")
-    }
-  }
+  def comicJson(id: String): Future[String] = comicList.find(c => c.id == id).get.json
 }
 
 

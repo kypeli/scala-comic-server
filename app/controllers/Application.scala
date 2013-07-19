@@ -2,9 +2,10 @@ package controllers
 
 import play.api._
 import play.api.mvc._
-import play.api.libs.ws.WS
+import play.api.libs.ws._
 import play.api.libs.concurrent.Execution.Implicits._
 import play.api.libs.concurrent._
+import scala.concurrent._
 
 object Application extends Controller {
   
@@ -24,10 +25,31 @@ object Application extends Controller {
 */    
   }
 
-  def comic(id: String) = Action {
-    id.length match {
-      case 0 => BadRequest("No id specified")
-      case _ => Ok(models.Comics.comicJson(id))
+  def comic(id: String) = Action { request =>
+    Logger.info("New request for comic: " + id)
+    try {
+      val futureJson = models.Comics.comicJson(id)
+      Async {      
+        futureJson.map(json => Ok(json))
+/*        promiseOfJson.map { response => 
+          Logger.info("Comic request ready.")
+          Ok(response)
+        }*/
+      }
+    } catch {
+      case _ => {
+        Logger.error("No such comic: " + request)
+        BadRequest("Error: No such comic: " + id)
+      }
     }
+/*      id.length match {
+          case 0 => BadRequest("No id specified")
+          case _ => {
+            val futureResponse: Future[play.api.libs.ws.Response] = models.Comics.comicJson(id)
+            futureResponse onSuccess {
+               case response => Ok(response.body)
+            }
+          }
+      }*/
   }
 }
