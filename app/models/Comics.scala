@@ -22,7 +22,7 @@ abstract class Comic {
       Json.obj(
         "id" -> c.id,
         "name" -> c.name,
-        "stripUrl" -> c.stripUrl
+        "url" -> c.stripUrl
       )
     }
   }
