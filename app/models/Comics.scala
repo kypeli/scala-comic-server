@@ -57,3 +57,17 @@ class Fingerpori extends Comic {
   override val comicRegex = """http://[a-z\?=\.:/_0-9]*/sarjis/[a-z\?=\.:/_0-9]*""".r    
 }
 
+class ViiviJaWagner extends Comic {
+  override val id = "vw"
+  override val name = "Viivi ja Wagner"
+  override val siteUrl = "http://www.hs.fi/viivijawagner/"
+  override val comicRegex = """http://[a-z\?=\.:/_0-9]*/sarjis/[a-z\?=\.:/_0-9]*""".r    
+}
+
+class Sinfest extends Comic {
+  override val id = "sf"
+  override val name = "Sinfest"
+  override val siteUrl = "http://www.sinfest.net/"
+  override val comicRegex = """http://sinfest.net/[a-z\?=\.:/_0-9]*/comics/[a-z\?=\.:/_0-9-]*.gif""".r    
+}
+

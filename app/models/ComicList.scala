@@ -18,7 +18,9 @@ object Comics {
     }
   }
 
-  private val comicList = List(new Fingerpori())
+  private val comicList = List(new Fingerpori,
+                               new ViiviJaWagner,
+                               new Sinfest)
   val listjson = Json.toJson(Json.obj("comics" -> comicList))
 
   def comicJson(id: String): Future[String] = comicList.find(c => c.id == id).get.json
