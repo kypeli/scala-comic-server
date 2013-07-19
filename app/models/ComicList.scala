@@ -22,7 +22,8 @@ object Comics {
     }
   }
 
-  private val comicList = List(new Dilbert, 
+  private val comicList = List(// new Dilbert,    // Play2 WS.Response can't handle the invalid MIME type that dilbert.com gives us. 
+                                                  // I really wish I could handle this somehow. 
                                new Fingerpori,
                                new ViiviJaWagner,
                                new Sinfest,
@@ -31,7 +32,14 @@ object Comics {
                                new PhDComic,
                                new QuestionableContent,
                                new AnonyymitElaimet,
-                               new FokIt)
+                               new FokIt,
+                               new ElComicSans,
+                               new Bunsen,
+                               new AbstruseGoose,
+                               new Scandinavian,
+                               new NatalieD,
+                               new ToothpasteForDinner
+                             )
 
   def listjson(remoteIP: String): Future[JsValue] = {
     WS.url(IPINFODB_URL + remoteIP).get().map { response => 
@@ -40,12 +48,6 @@ object Comics {
       Json.toJson(Json.obj("comics" -> comicList.filter(c => (c.countryCodes == "" || c.countryCodes.contains(country)) )))
     }
   }
-//   val listjson = Json.toJson(Json.obj("comics" -> comicList))
 
   def comicJson(id: String): Future[String] = comicList.find(c => c.id == id).get.json
 }
-
-
-//    val redis = new SingleRedis("localhost", 6379)
-//    redis.set("foo", "bar")
-//    Ok(redis.get("foo").get)

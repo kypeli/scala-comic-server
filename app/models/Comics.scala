@@ -106,10 +106,17 @@ class XKCD extends Comic {
   override val comicRegex = """http://imgs.xkcd.com/comics/[a-z_./0-9]*""".r    
 }
 
+/**
+* Windows Phone's ImageToolkit library cannot convert ths PhD Comic's GIF image to a 
+* proper PNG image. Hence I am doing it on my server instead.
+* Oh - and Windows Phone doesn't support GIF at all so...
+*/
 class PhDComic extends Comic {
   override val id = "phd"
   override val name = "PhD Comic"
   stripUrl = "http://kypeli.kapsi.fi/comics/phd.png"
+//  override val siteUrl = "http://www.phdcomics.com/comics.php"
+//  override val comicRegex = """http://www.phdcomics.com/comics/archive/[a-z_./0-9]*""".r
 }
 
 class QuestionableContent extends Comic {
@@ -133,4 +140,57 @@ class FokIt extends Comic {
   override val siteUrl = "http://nyt.fi/tag/fok_it-kaikki/"  
   override val comicRegex = """http://nyt.fi/wp-content/uploads/[a-z._\-/0-9]*fokit_[a-z._\-/0-9]*.jpg""".r
   override val countryCodes = "fi"
+}
+
+class ElComicSans extends Comic {
+  override val id = "elcomic"
+  override val name = "El Comic Sans"
+  override val siteUrl = "http://www.elcomicsans.com/"  
+  override val comicRegex = """http://www.elcomicsans.com/comics/[a-z.\-/0-9]*""".r
+  override val countryCodes = "es,br,mx,ar"
+}
+
+class Bunsen extends Comic {
+  override val id = "bunsen"
+  override val name = "Bunsen"
+  override val siteUrl = "http://www.heroeslocales.com/bunsen/"  
+  override val comicRegex = """http://www.heroeslocales.com/bunsen/comics/[a-z\-./0-9]*""".r
+  override val countryCodes = "es,br,mx,ar"
+}
+
+class AbstruseGoose extends Comic {
+  override val id = "ag"
+  override val name = "Abstruse Goose"
+  override val siteUrl = "http://abstrusegoose.com/"  
+  override val comicRegex = """http://abstrusegoose.com/strips/[A-Za-z._\-/0-9]*""".r
+}
+
+class Scandinavian extends Comic {
+  override val id = "ag"
+  override val name = "Scandinavia and the World"
+  override val siteUrl = "http://satwcomic.com/"  
+  override val comicRegex = """http://satwcomic.com/art/[A-Za-z._\-/0-9]*""".r
+}
+
+class NatalieD extends Comic {
+  override val id = "nat"
+  override val name = "Natalie Dee"
+  override val siteUrl = "http://www.nataliedee.com"  
+  override val comicRegex = """http://www\.nataliedee\.com/[0-9]*/[a-zA-Z\-.]*.[jpg|png|gif]""".r
+}
+
+class ToothpasteForDinner extends Comic {
+  override val id = "tpfd"
+  override val name = "Toothpaste for Dinner"
+  override val siteUrl = "http://www.toothpastefordinner.com"  
+  override val comicRegex = """http://www\.toothpastefordinner\.com/[0-9]*/[a-zA-Z\-]*[.gif|.jpg|.png]*""".r
+}
+
+// We need to get the comic URL with something more than just a Regex since the complete URL is not available
+// on the site's source.
+class SomethingPositive extends Comic {
+  override val id = "sp"
+  override val name = "Something*Positive"
+  override val siteUrl = "http://www.somethingpositive.net"  
+  override val comicRegex = """""".r
 }
