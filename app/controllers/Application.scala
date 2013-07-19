@@ -13,8 +13,11 @@ object Application extends Controller {
     Ok(views.html.index("Your new application is ready."))
   }
 
-  def list = Action {
-    Ok(models.Comics.listjson)
+  def list = Action { request => 
+    val futureList = models.Comics.listjson(request.remoteAddress)
+    Async {
+        futureList.map(json => Ok(json))
+    }
   }
 
   def comic(id: String) = Action { request =>

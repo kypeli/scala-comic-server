@@ -13,6 +13,7 @@ abstract class Comic {
   val id: String = ""
   val name: String = ""
   val siteUrl: String = ""
+  val countryCodes: String = ""
 
   var lastUpdated: DateTime = DateTime.yesterday
   var stripUrl = "someurl"
@@ -55,6 +56,7 @@ class Fingerpori extends Comic {
   override val name = "Fingerpori"
   override val siteUrl = "http://www.hs.fi/fingerpori"
   override val comicRegex = """http://[a-z\?=\.:/_0-9]*/sarjis/[a-z\?=\.:/_0-9]*""".r    
+  override val countryCodes = "fi"
 }
 
 class ViiviJaWagner extends Comic {
@@ -62,6 +64,7 @@ class ViiviJaWagner extends Comic {
   override val name = "Viivi ja Wagner"
   override val siteUrl = "http://www.hs.fi/viivijawagner/"
   override val comicRegex = """http://[a-z\?=\.:/_0-9]*/sarjis/[a-z\?=\.:/_0-9]*""".r    
+  override val countryCodes = "fi"
 }
 
 class Sinfest extends Comic {
