@@ -1,0 +1,56 @@
+package models
+
+import play.api._
+import play.api.libs.ws._
+import scala.concurrent._
+// import com.top10.redis._
+import play.api.libs.json._
+import ExecutionContext.Implicits.global
+import com.github.nscala_time.time.Imports._
+
+abstract class Comic {
+  val comicRegex: scala.util.matching.Regex = null
+  val id: String = ""
+  val name: String = ""
+
+  var lastUpdated: DateTime = DateTime.yesterday
+  var stripUrl = "someurl"
+  
+  implicit val comicWriter = new Writes[Comic] {
+    def writes(c: Comic): JsValue = {
+      Json.obj(
+        "id" -> c.id,
+        "name" -> c.name,
+        "stripUrl" -> c.stripUrl
+      )
+    }
+  }
+
+  def json: Future[String] = {  
+    val resultPromise = promise[String]
+
+    future {
+      if ((lastUpdated + 60.minutes) < DateTime.now) {
+        Logger.info("Cache expired. Fetching new comic URL.")
+        WS.url("http://www.hs.fi/fingerpori").get().map { response =>
+          stripUrl = comicRegex.findFirstIn(response.body).get
+          resultPromise success stripUrl
+          lastUpdated = DateTime.now
+          Logger.info("Serving new result: " + stripUrl)
+        }
+      } else {
+        Logger.info("Serving cached result: " + stripUrl)
+        resultPromise success stripUrl 
+      }
+    }
+
+    resultPromise.future 
+  }
+}
+
+class Fingerpori extends Comic {
+  override val id = "fp"
+  override val name = "Fingerpori"
+  override val comicRegex = """http://[a-z\?=\.:/_0-9]*/sarjis/[a-z\?=\.:/_0-9]*""".r    
+}
+

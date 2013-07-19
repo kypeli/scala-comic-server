@@ -31,10 +31,6 @@ object Application extends Controller {
       val futureJson = models.Comics.comicJson(id)
       Async {      
         futureJson.map(json => Ok(json))
-/*        promiseOfJson.map { response => 
-          Logger.info("Comic request ready.")
-          Ok(response)
-        }*/
       }
     } catch {
       case _ => {
