@@ -34,9 +34,8 @@ object Comics {
                                new FokIt)
 
   def listjson(remoteIP: String): Future[JsValue] = {
-    Logger.info("Got request from: " + remoteIP)
     WS.url(IPINFODB_URL + remoteIP).get().map { response => 
-        Logger.info("Geo info: " + response.body)
+        Logger.info("Request from: " + remoteIP + ", " + (response.json \ "countryCode") + ", City: " + (response.json \ "cityName"))
       val country = (response.json \ "countryCode").as[String].toLowerCase
       Json.toJson(Json.obj("comics" -> comicList.filter(c => (c.countryCodes == "" || c.countryCodes.contains(country)) )))
     }
