@@ -12,7 +12,7 @@ object Comics {
   implicit val comicListWriter = new Writes[Comic] {
     def writes(c: Comic): JsValue = {
       Json.obj(
-        "id" -> c.id,
+        "comicid" -> c.id,
         "name" -> c.name
       )
     }
