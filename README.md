@@ -1,7 +1,7 @@
 Scala Comic Server
 ==================
 
-The Scala Comic Server is written in Scala [duh] using Play 2.1 to serve meta data in JSON format about comics from around the web. It's intended to be used as a backend server for a client application. 
+The Scala Comic Server is written in [Scala](http://www.scala-lang.org/) [duh] using [Play 2.1](http://www.playframework.com/) to serve meta data in JSON format about comics from around the web. It's intended to be used as a backend server for a client application. 
 
 Supported comics
 ----------------
@@ -32,7 +32,7 @@ The following comics are currently supported:
 
 How it works
 ------------
-The server will serve data about the comics in JSON format. The JSON has information about the comics so that a client can show it - but the server itself does not serve images nor store any images. 
+The server will serve data about the comics in JSON format. The JSON has information about the comics so that a client can show it - **but the server itself does not serve images nor store any images**. 
 
 The data will be cached for 60 minutes on the Scala Comic Server after which the comic information is fetched again from the remote comic web server. 
 
@@ -44,6 +44,7 @@ The server has the following REST APIs.
 
 * /list - returns a list of available comics for the client to show to the user. JSON response: 
 
+```json
       {
          "comics": [
             {
@@ -57,15 +58,17 @@ The server has the following REST APIs.
             }
          ]
       }
-    
+```    
 
 * /comic?id=[comicid] - returns information about a specified comic. JSON response for comicid=sf 
 
+```json
       {
          "id": "sf",
          "name": "Sinfest",
          "url": "http://sinfest.net/comikaze/comics/2013-07-20.gif"
       }
+```
 
 Wanna try it right away?
 ------------------------
@@ -80,7 +83,7 @@ Clients
 -------
 The following clients use this server already:
 
-*   (Daily Comics for Windows Phone)[http://www.windowsphone.com/en-gb/store/app/daily-comics/c0d9a840-8463-4c5d-b881-f2022552f9c4]
+*   [Daily Comics for Windows Phone](http://www.windowsphone.com/en-gb/store/app/daily-comics/c0d9a840-8463-4c5d-b881-f2022552f9c4)
 
 TODO
 ----
@@ -90,6 +93,7 @@ Here are some things that I should do at some point:
 
 *   Make fetching of the 'stripUrl' parameter for each comic a bit more generic. Not all comics can be fetched with a simple regexp (like Something*Positive). 
 *   There's a bug in Play2 that causes issues when fetching Dilbert. See [here for details](http://stackoverflow.com/questions/17749965/force-decoding-of-play2s-play-api-libs-ws-response-to-utf-8-in-scala).
+*   Add more information about the comics, like when they were published.
 *   PhD Comics is actually still served from my old server because issues in the Windows Phone client that I have. 
 
 License
