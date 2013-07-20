@@ -42,11 +42,10 @@ REST APIs
 ---------
 The server has the following REST APIs.
 
-* /list - returns a list of available comics for the client to show to the user.    
-    JSON response: 
+* /list - returns a list of available comics for the client to show to the user. JSON response: 
 
-    {
-        "comics": [
+      {
+         "comics": [
             {
                 "comicid": "sf",
                 "name": "Sinfest"
@@ -56,24 +55,22 @@ The server has the following REST APIs.
                 "comicid": "uf",
                 "name": "UserFriendly"
             }
-        ]
-    }
+         ]
+      }
     
 
-* /comic?id=[comicid] - returns information about a specified comic.
-    JSON response for comicid=sf
+* /comic?id=[comicid] - returns information about a specified comic. JSON response for comicid=sf 
 
-    {
-        "id": "sf",
-        "name": "Sinfest",
-        "url": "http://sinfest.net/comikaze/comics/2013-07-20.gif"
-    }
+      {
+         "id": "sf",
+         "name": "Sinfest",
+         "url": "http://sinfest.net/comikaze/comics/2013-07-20.gif"
+      }
 
 Wanna try it right away?
 ------------------------
 The server is up and running without authentication, so go ahead and use the following REST APIs now:
 
-*   Red
 *   http://scala-comic-server.herokuapp.com/list
 *   http://scala-comic-server.herokuapp.com/comic?id=[comicid]
 
