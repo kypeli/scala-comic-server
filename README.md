@@ -42,25 +42,27 @@ REST APIs
 ---------
 The server has the following REST APIs.
 
-* /list - returns a list of available comics for the client to show to the user.
+* /list - returns a list of available comics for the client to show to the user.    
     JSON response: 
-        {
-            "comics": [
-                {
-                    "comicid": "sf",
-                    "name": "Sinfest"
-                },
-                ...
-                {
-                    "comicid": "uf",
-                    "name": "UserFriendly"
-                }
-            ]
-        }
+
+    {
+        "comics": [
+            {
+                "comicid": "sf",
+                "name": "Sinfest"
+            },
+            ...
+            {
+                "comicid": "uf",
+                "name": "UserFriendly"
+            }
+        ]
+    }
     
 
 * /comic?id=[comicid] - returns information about a specified comic.
     JSON response for comicid=sf
+
     {
         "id": "sf",
         "name": "Sinfest",
@@ -70,24 +72,28 @@ The server has the following REST APIs.
 Wanna try it right away?
 ------------------------
 The server is up and running without authentication, so go ahead and use the following REST APIs now:
-    * http://scala-comic-server.herokuapp.com/list
-    * http://scala-comic-server.herokuapp.com/comic?id=[comicid]
+
+*   Red
+*   http://scala-comic-server.herokuapp.com/list
+*   http://scala-comic-server.herokuapp.com/comic?id=[comicid]
 
 **NOTE:** The server is for evaluation purposes only and is operating on a best effort principle. It's not guaranteed that the server will be up at any specifiec moment. 
 
 Clients
 -------
 The following clients use this server already:
-    * (Daily Comics for Windows Phone)[http://www.windowsphone.com/en-gb/store/app/daily-comics/c0d9a840-8463-4c5d-b881-f2022552f9c4]
+
+*   (Daily Comics for Windows Phone)[http://www.windowsphone.com/en-gb/store/app/daily-comics/c0d9a840-8463-4c5d-b881-f2022552f9c4]
 
 TODO
 ----
 The server is not complete. I am also looking forward to contributions if you find that some comic should be supported but it's not, or if you can improve the code in some other ways. 
 
 Here are some things that I should do at some point:
-    * Make fetching of the 'stripUrl' parameter for each comic a bit more generic. Not all comics can be fetched with a simple regexp (like Something*Positive). 
-    * There's a bug in Play2 that causes issues when fetching Dilbert. See [here for details](http://stackoverflow.com/questions/17749965/force-decoding-of-play2s-play-api-libs-ws-response-to-utf-8-in-scala).
-    * PhD Comics is actually still served from my old server because issues in the Windows Phone client that I have. 
+
+*   Make fetching of the 'stripUrl' parameter for each comic a bit more generic. Not all comics can be fetched with a simple regexp (like Something*Positive). 
+*   There's a bug in Play2 that causes issues when fetching Dilbert. See [here for details](http://stackoverflow.com/questions/17749965/force-decoding-of-play2s-play-api-libs-ws-response-to-utf-8-in-scala).
+*   PhD Comics is actually still served from my old server because issues in the Windows Phone client that I have. 
 
 License
 -------
