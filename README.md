@@ -16,7 +16,6 @@ The following comics are currently supported:
 *   [Scandinavia and the World](http://satwcomic.com/)
 *   [Natalie Dee](http://www.nataliedee.com)
 *   [Toothpaste for Dinner](http://www.toothpastefordinner.com)
-
 *   [El Cómic Sans](http://www.elcomicsans.com/) 
     * Regions: Spain, Mexico, Argentina, Brazil
 *   [Bunsen](http://http://www.heroeslocales.com/bunsen/) 
