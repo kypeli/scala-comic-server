@@ -27,7 +27,7 @@ The following comics are currently supported:
     * Regions: Finland
 *   [Fok_It](http://nyt.fi/tag/fok_it-kaikki) 
     * Regions: Finland
-*   [Anonyymis Eläimet](http://nyt.fi/category/sarjakuvat/) 
+*   [Anonyymit Eläimet](http://nyt.fi/category/sarjakuvat/) 
     * Regions: Finland
 
 How it works
@@ -36,7 +36,7 @@ The server will serve data about the comics in JSON format. The JSON has informa
 
 The data will be cached for 60 minutes on the Scala Comic Server after which the comic information is fetched again from the remote comic web server. 
 
-As specified above, some comic are regional and will only be listed for people coming from those countries. By default, and if not specified above, the comic is served to everyone. Thus, the server does a reverse geolocation lookup on the client's IP address to find out from which country the request originates from. 
+As specified above, some comics are regional and will only be listed for people coming from those countries. By default, and if not specified above, the comic is served to everyone. Thus, the server does a reverse geolocation lookup on the client's IP address to find out from which country the request originates from. 
 
 REST APIs
 ---------
@@ -92,7 +92,6 @@ The server is not complete. I am also looking forward to contributions if you fi
 Here are some things that I should do at some point:
 
 *   Make fetching of the 'stripUrl' parameter for each comic a bit more generic. Not all comics can be fetched with a simple regexp (like Something*Positive). 
-*   There's a bug in Play2 that causes issues when fetching Dilbert. See [here for details](http://stackoverflow.com/questions/17749965/force-decoding-of-play2s-play-api-libs-ws-response-to-utf-8-in-scala).
 *   Add more information about the comics, like when they were published.
 *   PhD Comics is actually still served from my old server because issues in the Windows Phone client that I have. 
 
