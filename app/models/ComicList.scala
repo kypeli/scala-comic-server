@@ -23,7 +23,6 @@ object Comics {
   }
 
   private val comicList = List(new Dilbert,    // Play2 WS.Response can't handle the invalid MIME type that dilbert.com gives us. 
-                                                  // I really wish I could handle this somehow. 
                                new Fingerpori,
                                new ViiviJaWagner,
                                new Sinfest,
