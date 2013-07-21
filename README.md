@@ -7,6 +7,7 @@ Supported comics
 ----------------
 The following comics are currently supported:
 
+*   [Dilbert](http://dilbert.com)
 *   [Sinfest](http://sinfest.net)
 *   [UserFriendly](http://www.userfriendly.org)
 *   [XKCD](http://xkcd.com)
