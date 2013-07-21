@@ -6,7 +6,7 @@ import scala.concurrent._
 import play.api.libs.json._
 import ExecutionContext.Implicits.global
 import com.github.nscala_time.time.Imports._
-import scalaj.http.Http
+import scalaj.http._
 
 abstract class Comic {
   val RefreshInterval = 60 // Minutes.
@@ -37,7 +37,7 @@ abstract class Comic {
       if (comicRegex != null && (lastUpdated + RefreshInterval.minutes) < DateTime.now) {
         Logger.info("Cache expired. Fetching new comic URL.")
         try {
-          val http = Http(siteUrl).asString
+          val http = Http(siteUrl).option(HttpOptions.connTimeout(5000)).option(HttpOptions.readTimeout(10000)).asString
           comicRegex.findFirstIn(http) match {
             case Some(url) => stripUrl = url
             case None      => Logger.error("Could not find comic url for id: " + id)
