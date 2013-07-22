@@ -59,6 +59,13 @@ abstract class Comic {
   }
 }
 
+class MarshallsLaw extends Comic {
+  override val id = "ml"
+  override val name = "Marshall's Law"
+  override val siteUrl = "https://www.facebook.com/marshallscomics"
+  override val comicRegex = """https://fbcdn-sphotos-b-a\.akamaihd\.net/hphotos-ak-ash4/p480x480/[0-9_a-zA-Z]*.jpg""".r    
+}
+
 class Fingerpori extends Comic {
   override val id = "fp"
   override val name = "Fingerpori"
@@ -173,7 +180,7 @@ class NatalieD extends Comic {
   override val id = "nat"
   override val name = "Natalie Dee"
   override val siteUrl = "http://www.nataliedee.com"  
-  override val comicRegex = """http://www\.nataliedee\.com/[0-9]*/[a-zA-Z\-.]*.[jpg|png|gif]""".r
+  override val comicRegex = """http://www\.nataliedee\.com/[0-9]*/[a-zA-Z0-9\-.]*.[jpg|png|gif]""".r
 }
 
 class ToothpasteForDinner extends Comic {
