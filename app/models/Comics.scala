@@ -63,7 +63,7 @@ class MarshallsLaw extends Comic {
   override val id = "ml"
   override val name = "Marshall's Law"
   override val siteUrl = "https://www.facebook.com/marshallscomics"
-  override val comicRegex = """https://fbcdn-sphotos-b-a\.akamaihd\.net/hphotos-ak-ash4/p480x480/[0-9_a-zA-Z]*.jpg""".r    
+  override val comicRegex = """https://fbcdn-sphotos-h-a\.akamaihd\.net/hphotos[0-9a-z\-]*/p480x480/[0-9_a-zA-Z]*.jpg""".r    
 }
 
 class Fingerpori extends Comic {
