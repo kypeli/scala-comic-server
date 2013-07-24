@@ -17,6 +17,7 @@ The following comics are currently supported:
 *   [Scandinavia and the World](http://satwcomic.com/)
 *   [Natalie Dee](http://www.nataliedee.com)
 *   [Toothpaste for Dinner](http://www.toothpastefordinner.com)
+*   [Marshall's Law](https://www.facebook.com/marshallscomics)
 *   [El Cómic Sans](http://www.elcomicsans.com/) 
     * Regions: Spain, Mexico, Argentina, Brazil
 *   [Bunsen](http://http://www.heroeslocales.com/bunsen/) 
@@ -32,9 +33,9 @@ The following comics are currently supported:
 
 How it works
 ------------
-The server will serve data about the comics in JSON format. The JSON has information about the comics so that a client can show it - **but the server itself does not serve images nor store any images**. 
+The server will serve data about the comics in JSON format so that a client can show the most recent strip of a given comic. **The server itself does not serve images nor store any images**. 
 
-The data will be cached for 60 minutes on the Scala Comic Server after which the comic information is fetched again from the remote comic web server. 
+The JSON data will be cached for 60 minutes on the Scala Comic Server after which the comic information is fetched again and updated from the remote comic web server. This way the most recent comic strip is available to the client within 60 minutes after it's being published on the website.
 
 As specified above, some comics are regional and will only be listed for people coming from those countries. By default, and if not specified above, the comic is served to everyone. Thus, the server does a reverse geolocation lookup on the client's IP address to find out from which country the request originates from. 
 
@@ -42,7 +43,7 @@ REST APIs
 ---------
 The server has the following REST APIs.
 
-* /list - returns a list of available comics for the client to show to the user. JSON response: 
+* */list* - returns a list of available comics for the client to show to the user. JSON response: 
 
 ```json
       {
@@ -60,7 +61,7 @@ The server has the following REST APIs.
       }
 ```    
 
-* /comic?id=[comicid] - returns information about a specified comic. JSON response for comicid=sf 
+* */comic?id=[comicid]* - returns information about a specified comic. JSON response for comicid=sf 
 
 ```json
       {
