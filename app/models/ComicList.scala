@@ -30,7 +30,7 @@ object Comics {
                                new XKCD,
                                new PhDComic,
                                new QuestionableContent,
-                               new AnonyymitElaimet,
+//                               new AnonyymitElaimet,
                                new FokIt,
                                new ElComicSans,
                                new Bunsen,
