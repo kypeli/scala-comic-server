@@ -170,7 +170,7 @@ class AbstruseGoose extends Comic {
 }
 
 class Scandinavian extends Comic {
-  override val id = "ag"
+  override val id = "scan"
   override val name = "Scandinavia and the World"
   override val siteUrl = "http://satwcomic.com/"  
   override val comicRegex = """http://satwcomic.com/art/[A-Za-z._\-/0-9]*""".r
