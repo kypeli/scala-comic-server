@@ -190,6 +190,13 @@ class ToothpasteForDinner extends Comic {
   override val comicRegex = """http://www\.toothpastefordinner\.com/[0-9]*/[a-zA-Z\-]*[.gif|.jpg|.png]*""".r
 }
 
+class GeekAndPoke extends Comic {
+  override val id = "gap"
+  override val name = "Geek & Poke"
+  override val siteUrl = "http://www.geek-and-poke.com"  
+  override val comicRegex = """http://static\.squarespace\.com/static/[0-9a-zA-Z\-/]*.jpg""".r
+}
+
 // We need to get the comic URL with something more than just a Regex since the complete URL is not available
 // on the site's source.
 class SomethingPositive extends Comic {
