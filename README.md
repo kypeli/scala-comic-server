@@ -18,6 +18,7 @@ The following comics are currently supported:
 *   [Natalie Dee](http://www.nataliedee.com)
 *   [Toothpaste for Dinner](http://www.toothpastefordinner.com)
 *   [Marshall's Law](https://www.facebook.com/marshallscomics)
+*   [Geek & Poke](http://geek-and-poke.com/)
 *   [El Cómic Sans](http://www.elcomicsans.com/) 
     * Regions: Spain, Mexico, Argentina, Brazil
 *   [Bunsen](http://http://www.heroeslocales.com/bunsen/) 
