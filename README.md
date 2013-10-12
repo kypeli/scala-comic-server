@@ -19,6 +19,7 @@ The following comics are currently supported:
 *   [Toothpaste for Dinner](http://www.toothpastefordinner.com)
 *   [Marshall's Law](https://www.facebook.com/marshallscomics)
 *   [Geek & Poke](http://geek-and-poke.com/)
+*   [Something*Positive](http://www.somethingpositive.net/)
 *   [El Cómic Sans](http://www.elcomicsans.com/) 
     * Regions: Spain, Mexico, Argentina, Brazil
 *   [Bunsen](http://http://www.heroeslocales.com/bunsen/) 
@@ -93,7 +94,6 @@ The server is not complete. I am also looking forward to contributions if you fi
 
 Here are some things that I should do at some point:
 
-*   Make fetching of the 'stripUrl' parameter for each comic a bit more generic. Not all comics can be fetched with a simple regexp (like Something*Positive). 
 *   Add more information about the comics, like when they were published.
 *   PhD Comics is actually still served from my old server because issues in the Windows Phone client that I have. 
 
