@@ -15,7 +15,6 @@ abstract class Comic {
   val name: String = ""
   val siteUrl: String = ""
   val countryCodes: String = ""
-
   var lastUpdated: DateTime = DateTime.yesterday
   var stripUrl = ""
   
@@ -24,7 +23,7 @@ abstract class Comic {
       Json.obj(
         "id" -> c.id,
         "name" -> c.name,
-        "url" -> c.stripUrl
+        "url" -> c.getStripUrl
       )
     }
   }
@@ -56,6 +55,10 @@ abstract class Comic {
     }
 
     resultPromise.future 
+  }
+
+  def getStripUrl: String = {
+    this.stripUrl
   }
 }
 
@@ -203,5 +206,9 @@ class SomethingPositive extends Comic {
   override val id = "sp"
   override val name = "Something*Positive"
   override val siteUrl = "http://www.somethingpositive.net"  
-  override val comicRegex = """""".r
+  override val comicRegex = """sp[0-9]*.png""".r
+
+  override def getStripUrl: String = {
+    "http://www.somethingpositive.net/" + stripUrl
+  }
 }

@@ -39,7 +39,8 @@ object Comics {
                                new NatalieD,
                                new ToothpasteForDinner,
                                new MarshallsLaw,
-                               new GeekAndPoke
+                               new GeekAndPoke,
+                               new SomethingPositive
                              )
 
   def listjson(remoteIP: String): Future[JsValue] = {
